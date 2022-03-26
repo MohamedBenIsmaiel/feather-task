@@ -6,11 +6,17 @@ module.exports = function (app) {
   const modelName = 'users';
   const mongooseClient = app.get('mongooseClient');
   const schema = new mongooseClient.Schema({
-  
+    name: {type: String, minLength: 4},
     email: { type: String, unique: true, lowercase: true },
-    password: { type: String },
-  
-  
+    password: { type: String, minLength: 6},
+    isAdmin: {
+      type: Boolean,
+      defaultValue: false
+    },
+    address: {
+      type: String,
+      minLength: 6,
+    }
   }, {
     timestamps: true
   });
